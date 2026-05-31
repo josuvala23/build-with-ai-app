@@ -19,7 +19,7 @@ app.post('/submit', (req, res) => {
     if (wordCount < 10) {
         return res.send(`
             <h1>Error</h1>
-            <p>La propuesta debe tener mínimo 10 palabras.</p>
+            <p>La propuesta debe tener mínimamente 10 palabras.</p>
             <a href="/">Volver</a>
         `);
     }
@@ -38,6 +38,10 @@ app.post('/submit', (req, res) => {
     `);
 });
 
-app.listen(PORT, () => {
-    console.log(`Servidor corriendo en http://localhost:${PORT}`);
-});
+if (process.env.NODE_ENV !== 'production') {
+    app.listen(PORT, () => {
+        console.log(`Servidor corriendo en http://localhost:${PORT}`);
+    });
+}
+
+module.exports = app;
